@@ -46,3 +46,13 @@ spec:
   serviceMonitorNamespaceSelector: {}
   serviceMonitorSelector: {}
   version: 2.46.0
+  additionalScrapeConfigs:
+    name: additional-configs
+    key: prometheus-additional.yaml
+  storage:
+    volumeClaimTemplate:
+      spec:
+        storageClassName: local-path
+        resources:
+          requests:
+            storage: 20Gi

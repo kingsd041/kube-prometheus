@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: email-password
+  namespace: monitoring
+type: Opaque
+data:
+  password: password
+---
+apiVersion: monitoring.coreos.com/v1alpha1
+kind: AlertmanagerConfig
+metadata:
+  name: email
+  namespace: monitoring
+  labels:
+    alertmanagerConfig: example-email
+spec:
+  receivers:
+    - name: email
+      emailConfigs:
+        - to: 'nicholas_ksd@hotmail.com'
+          from: "14375734@qq.com"
+          smarthost: "smtp.qq.com:465"
+          authUsername: "14375734@qq.com"
+          requireTLS: false
+          authPassword: 
+            name: email-password
+            key: password
+          authIdentity: "14375734@qq.com"
+  route:
+    groupBy: ['namespace']
+    groupWait: 30s
+    groupInterval: 5m
+    repeatInterval: 12h
+    receiver: email
+    routes:
+      - receiver: email
+        match:
+          severity: info

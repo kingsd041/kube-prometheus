@@ -10,6 +10,8 @@ metadata:
   name: main
   namespace: monitoring
 spec:
+  alertmanagerConfiguration:
+    name: email
   image: quay.io/prometheus/alertmanager:v0.26.0
   nodeSelector:
     kubernetes.io/os: linux
@@ -27,7 +29,7 @@ spec:
       memory: 100Mi
     requests:
       cpu: 4m
-      memory: 100Mi
+      memory: 101Mi
   securityContext:
     fsGroup: 2000
     runAsNonRoot: true

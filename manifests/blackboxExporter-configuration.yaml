@@ -40,6 +40,8 @@ data:
         "prober": "tcp"
         "tcp":
           "preferred_ip_protocol": "ip4"
+      "icmp":
+        "prober": "icmp"
 kind: ConfigMap
 metadata:
   labels:
